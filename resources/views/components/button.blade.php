@@ -37,7 +37,8 @@ if (isset($type) && $type == 'submit') {
 
 if (isset($svg)) {
     
-    $class_svg = "<svg class=\"fill-{$color} {$size_svg}\"";
+    $svg_color = in_array($style, ['clear', 'hollow']) ? $bg : $color;
+    $class_svg = "<svg class=\"fill-{$svg_color} {$size_svg}\"";
     $svg = str_replace('<svg', $class_svg, $svg);
 
 }
