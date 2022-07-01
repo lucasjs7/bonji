@@ -16,16 +16,24 @@ use App\Http\Controllers\{
 |
 */
 
-Route::resources([
-    'products' => ProductController::class
-]);
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
+
+    Route::resources([
+        'products' => ProductController::class
+    ]);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/', function(){
+        return redirect()->route('admin.dashboard');
+    });
+
+});
+
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';

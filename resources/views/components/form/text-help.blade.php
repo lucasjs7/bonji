@@ -1,0 +1,1 @@
+<p {{ $attributes->merge(['class' => 'text-sm font-normal text-slate-400']) }}>{{ $slot }}</p>

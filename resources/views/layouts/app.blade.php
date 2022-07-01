@@ -15,11 +15,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="flex flex-row auto-cols-max min-h-screen bg-slate-100">
-            <div class="w-[156px]">
+        <div class="grid grid-cols-12 min-h-screen bg-slate-100">
+            <div class="lg:col-span-2 2xl:col-span-1">
                 @include('layouts.navigation')
             </div>
-            <div class="w-full">
+            <div class="lg:col-span-10 2xl:col-span-11">
                 <!-- Page Heading -->
                 <header class="bg-white shadow-sm">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
