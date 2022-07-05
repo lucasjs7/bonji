@@ -32,7 +32,7 @@
         <form action="{{ route('logout') }}" method="post">
             @csrf
             <button type="submit" class="inline-flex w-full">
-                <x-nav-link class="py-[20px] w-full text-left">
+                <x-nav-link class="py-5 w-full text-left">
                     Sair
                 </x-nav-link>
             </button>
