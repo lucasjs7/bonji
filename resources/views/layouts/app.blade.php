@@ -22,7 +22,7 @@
             <div class="lg:col-span-10 2xl:col-span-11">
                 <!-- Page Heading -->
                 <header class="bg-white shadow-sm">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
