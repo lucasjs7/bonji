@@ -142,11 +142,7 @@ class Product extends Model
     public function checkCategory($category_id, $categories = null)
     {
         return $categories == null
-<<<<<<< HEAD
                 ? $this->categories()->where('category_id', $category_id)->exists()
-=======
-                ? $this->categories()->where('category_id', $category_id)->count() > 0
->>>>>>> 5e12dce73d7476c1c7664d85f0cde0f13f14c837
                 : in_array($category_id, $categories);
     }
 }
