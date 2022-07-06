@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    ProductController
+    ProductController,
+    CategoryController,
+    MediaController
 };
 
 /*
@@ -18,8 +20,9 @@ use App\Http\Controllers\{
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
-    Route::resources([
-        'products' => ProductController::class
+    Route::resource('products', ProductController::class);
+    Route::resource('products.media', MediaController::class)->parameters([
+        'media' => 'media'
     ]);
 
     Route::get('/dashboard', function () {
