@@ -4,16 +4,16 @@ $tag = 'a';
 $color = $color ?? 'white';
 $bg = $bg ?? 'slate-700';
 $size = $size ?? '';
-$style = $style ?? 'default';
+$pattern = $pattern ?? 'default';
 $class = ['inline-flex items-center rounded-[4px] hover:cursor-pointer focus:outline-none disabled:opacity-25 transition ease-in-out duration-150'];
 
 $palette = [
-    'clear'   => "text-{$bg}",
+    'clear'   => "text-{$bg} border border-transparent",
     'hollow'  => "text-{$bg} border border-{$bg}",
     'default' => "text-{$color} border border-{$bg} bg-{$bg}"
 ];
 
-$class[] = $palette[$style ?? 'default'];
+$class[] = $palette[$pattern ?? 'default'];
 
 switch ($size) {
     case 'small':
@@ -38,7 +38,7 @@ if (isset($type) && $type == 'submit') {
 
 if (isset($svg)) {
     
-    $svg_color = in_array($style, ['clear', 'hollow']) ? $bg : $color;
+    $svg_color = in_array($pattern, ['clear', 'hollow']) ? $bg : $color;
     $class_svg = "<svg class=\"fill-{$svg_color} {$size_svg}\"";
     $svg = str_replace('<svg', $class_svg, $svg);
 

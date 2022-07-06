@@ -8,6 +8,8 @@ if (in_array($type, ['text', 'number', 'email', 'password', 'tel', 'week', 'url'
     $class = '';
 } elseif ($type == 'radio') {
     $class = '';
+} elseif ($type == 'file') {
+    $class = 'w-full mt-1 font-normal focus:border-blue-600 focus:outline-none focus:ring-0 focus:ring-transparent';
 }
 
 @endphp
