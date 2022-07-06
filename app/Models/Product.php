@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -58,7 +58,19 @@ class Product extends Model
 
         if (!$product->save())
             return back()->withInput()->withError('Erro inesperado.');
-            
+
+        $category = [];
+
+        if (isset($request->categories)) {
+
+            for ($i=0; $i < count($request->categories); $i++) {
+                $category[] = $request->categories[$i];
+            }
+
+        }
+
+        $product->categories()->attach($category);
+
         return redirect()->route('admin.products.index');
     }
 
@@ -83,6 +95,18 @@ class Product extends Model
         if (!$product->update())
             return back()->withInput()->withError('Erro inesperado.');
 
+        $category = [];
+        
+        if (isset($request->categories)) {
+                
+            for ($i=0; $i < count($request->categories); $i++) {
+                $category[] = $request->categories[$i];
+            }
+        
+        }
+
+        $product->categories()->sync($category);
+
         return redirect()->route('admin.products.index');
     }
 
@@ -97,6 +121,8 @@ class Product extends Model
 
         }
 
+        $this->categories()->sync([]);
+
         if (!$this->delete())
             return back()->withError('Erro inesperado.');
 
@@ -106,5 +132,17 @@ class Product extends Model
     public function media()
     {
         return $this->hasMany(Media::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function checkCategory($category_id, $categories = null)
+    {
+        return $categories == null
+                ? $this->categories()->where('category_id', $category_id)->exists()
+                : in_array($category_id, $categories);
     }
 }

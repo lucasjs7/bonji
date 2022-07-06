@@ -20,6 +20,7 @@ use App\Http\Controllers\{
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
 
+    Route::resource('products/categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('products.media', MediaController::class)->parameters([
         'media' => 'media'
