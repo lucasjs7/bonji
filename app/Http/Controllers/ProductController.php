@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
-use App\Models\Product;
+use App\Models\{
+    Product,
+    Category
+};
 
 class ProductController extends Controller
 {
@@ -22,9 +25,11 @@ class ProductController extends Controller
         return view('product.index', compact('products'));
     }
 
-    public function create()
+    public function create(Category $category, Product $product)
     {
-        return view('product.create');
+        $categories = $category->orderBy('name')->get();
+
+        return view('product.create', compact('product', 'categories'));
     }
 
     public function store(ProductRequest $request)
@@ -37,9 +42,11 @@ class ProductController extends Controller
         //
     }
 
-    public function edit(Product $product)
+    public function edit(Category $category, Product $product)
     {
-        return view('product.edit', compact('product'));
+        $categories = $category->orderBy('name')->get();
+
+        return view('product.edit', compact('product', 'categories'));
     }
 
     public function update(ProductRequest $request, Product $product)

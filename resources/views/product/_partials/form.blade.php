@@ -74,17 +74,27 @@
         </x-form.label>
     </div>
 </x-box>
-<x-box class="col-span-12 mb-4">
+<x-box class="col-span-12 mb-4 !pb-7">
     <div class="col-span-12">
         <h3 class="text-xl font-semibold text-slate-800 mb-2">Categorias</h3>
         <hr class="border-slate-200 mb-4">
     </div>
-    <div class="col-span-12">
-        <x-form.label>
-            <x-form.input type="checkbox" name="categories[]" value="999"/>
-            Categoria 1
-        </x-form.label>
-    </div>
+    @forelse($categories as $category)
+        <div class="col-span-4">
+            <x-form.label class="!mb-1">
+                @if(@$product->checkCategory($category->id, old('categories')))
+                    <x-form.input type="checkbox" name="categories[]" value="{{ $category->id }}" checked/>
+                @else
+                    <x-form.input type="checkbox" name="categories[]" value="{{ $category->id }}"/>
+                @endif
+                {{ $category->name }}
+            </x-form.label>
+        </div>
+    @empty
+        <div class="col-span-12">
+            Nenhuma categoria registrada.
+        </div>
+    @endforelse
 </x-box>
 <x-box class="col-span-12 mb-4">
     <div class="col-span-12">
